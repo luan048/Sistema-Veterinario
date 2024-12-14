@@ -2,6 +2,7 @@ package com.company.veterinario.controllers;
 
 import com.company.veterinario.models.ConsultaModel;
 import com.company.veterinario.services.ConsultaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,9 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/consultas")
 public class ConsultaController {
+    @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping("/consultas")
+    @GetMapping("/")
     @ResponseBody
     public List<ConsultaModel> getAll() {
         return consultaService.getAll();
@@ -24,14 +26,14 @@ public class ConsultaController {
 
     @PostMapping("/createConsulta")
     @ResponseBody
-    public ConsultaModel post(ConsultaModel consultaModel) {
-        return consultaService.post(consultaModel); // VER OQ RETORNA
+    public ConsultaModel post(@RequestBody ConsultaModel consultaModel) {
+        return consultaService.post(consultaModel);
     }
 
     @PutMapping("/{idConsulta}")
     @ResponseBody
     public String put(@PathVariable("idConsulta") Long idConsulta, @RequestBody ConsultaModel consultaModel) {
-        return consultaService.put(idConsulta, consultaModel); // VER OQ RETORNA
+        return consultaService.put(idConsulta, consultaModel);
     }
 
     @DeleteMapping("/{idConsulta}")
